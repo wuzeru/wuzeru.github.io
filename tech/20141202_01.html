@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+      <link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen">
+      <link rel="stylesheet" type="text/css" href="../stylesheets/pygment_trac.css" media="screen">
+      <link rel="stylesheet" type="text/css" href="../stylesheets/main.css" media="screen">
+      <link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print">
+      <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+      <![endif]-->
+      <title>Wuzeru.com</title>
+    </head>
+    <body>
+      <div id="container">
+        <div class="inner">
+          <h1>一个关于移动端和pc端的坑</h1>
+          <section id="main_content">
+            <p>
+              今天碰到一个问题，让我想不明白问题出在哪。在一个form下面，有一个沉底的logo，但是当input获得焦点时，安卓会把沉底的div顶上来，但ios不会。先上一段代码：
+            </p>
+            <pre>
+              <img src="images/20141202_01.png"/>
+              <code>
+                #footer{position:absolute;bottom:40px;}
+              </code>
+            </pre>
+            <p>
+              在尝试了各种方法无果后，我直接把img写在了form表单里，结果终于算是ios和安卓都成功了。至于究竟是什么原因，等我以后请教完别人之后，再放上来把。
+            </p>
+          </section>
+          <a href="javascript:history.go(-1)"><<返回</a>
+          <footer>
+            wuzeru.com一个小白程序员的前端世界
+          </footer>
+        </div>
+        </div>
+      </body>
+</html>
