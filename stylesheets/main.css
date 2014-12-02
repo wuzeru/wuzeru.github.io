@@ -1,0 +1,7 @@
+
+a{
+    cursor:pointer;
+}
+nav>a + a{
+    margin-left: 15px;
+}
