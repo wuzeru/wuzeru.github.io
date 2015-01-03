@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+      <link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen">
+      <link rel="stylesheet" type="text/css" href="../stylesheets/pygment_trac.css" media="screen">
+      <link rel="stylesheet" type="text/css" href="../stylesheets/main.css" media="screen">
+      <link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print">
+      <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+      <![endif]-->
+      <title>Wuzeru.com</title>
+    </head>
+    <body>
+      <div id="container">
+        <div class="inner">
+          <h1>html5 地理定位 </h1>
+          <section id="main_content">
+          <p>
+            这几天公司因为项目赶着上线，于是把所有研发的都留下来加班，法定假日加班，想到就心酸。不多说了，回到主题吧，趁着今天休息，整理一下项目里需要用到的定位功能。
+          </p>
+          <p>
+            HTML5 Geolocation。它的作用是用于用户定位，简单地讲就是返回出用户的经纬度。Internet Explorer 9、Firefox、Chrome、Safari 以及 Opera已经支持该功能。同时要指出的是，w3c上说拥有gps的设备可以获得更加准确的定位，但本人亲测之后是除非有gps，否则该功能几乎不可以使用，换句话说就是能在移动端上可以使用，但pc上无法使用。由此可以推测，这个功能的原理应该是依靠gps进行定位，当然具体的原理是什么，倒真的没有仔细研究过。
+          </p>
+          <p>
+            这个功能主要有两个方法： getCurrentPosition()，watchPosition()。这次项目用的就是getCurrentPosition()，可以获得当前用户的经纬度。
+          </p>
+          <p>
+            getCurrentPosition()主要用两个参数：success(),error(),分别表示成功获得的回调和出现错误的回调。
+          </p>
+          <pre>
+            function getLocation()
+            {
+              if (navigator.geolocation)
+                {
+                navigator.geolocation.getCurrentPosition(showPosition,showError);
+                }
+              else{
+                //浏览器不支持
+              }
+            }
+            function showPosition(position)
+            {
+              //todo
+            }
+          </pre>
+          <P>
+            错误代码有三种：Permission denied(用户不允许)，Position unavailable(无法获取当前位置)，Timeout(操作超时)。错误代码存放在getCurrentPosition()方法的第二个回调的参数里。
+          </P>
+          <pre>
+            function showError(error)
+            {
+              switch(error.code)
+                {
+                case error.PERMISSION_DENIED:
+                  x.innerHTML="User denied the request for Geolocation."
+                  break;
+                case error.POSITION_UNAVAILABLE:
+                  x.innerHTML="Location information is unavailable."
+                  break;
+                case error.TIMEOUT:
+                  x.innerHTML="The request to get user location timed out."
+                  break;
+                case error.UNKNOWN_ERROR:
+                  x.innerHTML="An unknown error occurred."
+                  break;
+                }
+            }
+          </pre>
+          <p>
+            获取到用户的经纬度之后，就可以调用相关的第三方地图api，来获得用户的地理信息。我们公司这次用的是百度的api。从结果上说，基本能正确返回地理信息，但存在误差，基本可以精确到区，但路名不精确。
+          </p>
+          <p>
+            关于watchPosition这个方法，因为项目里没有使用，就不详细说了，其实就是对getCurrentPosition方法的定时轮询，不断地获得用户的经纬度。然后，我们可以通过clearWatch()停止watchPosition的使用。
+          </p>
+          <p>以上。</p>
+          </section>
+                    <a href="javascript:history.go(-1)"><<返回</a>
+          <footer>
+            wuzeru.com一个小白程序员的前端世界
+          </footer>
+        </div>
+        </div>
+      </body>
+</html>
